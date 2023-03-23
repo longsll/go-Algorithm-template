@@ -1,0 +1,34 @@
+type pair struct { // 存储区间
+    first  int // 区间左端点
+    second int // 区间右端点
+}
+
+func merge(segs []pair) []pair {
+    var res []pair // 定义区间合并后的结果
+    sort.Slice(segs, func(i, j int) bool {
+        if segs[i].first == segs[j].first {
+            return segs[i].second < segs[j].second
+        } // 优先以左端点大小排序
+        return segs[i].first < segs[j].first
+    })
+
+    // 从左往右扫描，维护当前区间
+    start, end := math.MinInt32, math.MinInt32 // 边界设为负无穷到正无穷
+    for _, seg := range segs {
+        if end < seg.first { // 没有交集
+            if start != math.MinInt32 {
+                res = append(res, pair{start, end})
+            }
+            start, end = seg.first, seg.second
+        } else { // 有交集
+            if seg.second > end {
+                end = seg.second
+            }
+        }
+    }
+
+    if start != math.MinInt32 { // 避免 segs 为空
+        res = append(res, pair{start, end})
+    }
+    return res // 更新维护的当前区间
+}
