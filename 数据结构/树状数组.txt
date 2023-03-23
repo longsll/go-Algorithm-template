@@ -1,0 +1,21 @@
+const N int = 1000
+
+var tr [N] int
+
+func lowbit(x int) int {
+	return (x&(-x))
+}
+
+func add(x int , c int) {
+	for i := x ; i <= N ; i += lowbit(i) {
+		tr[i] += c
+	}
+}
+
+func sum(x int) int {
+	var res = 0
+	for i := x ; i > 0; i -= lowbit(i) {
+		res += tr[i]
+	}
+	return res
+}

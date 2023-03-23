@@ -1,0 +1,33 @@
+const N int = 1000
+
+var (
+	son [N][26] int
+	cnt [N] int
+	idx int
+	str [N] byte
+)
+
+func insert(str string) {
+	p := 0
+	for i := 0 ; i < len(str) ; i ++ {
+		u := int(str[i])
+		if son[p][u] != 0 {
+			son[p][u] = idx
+			idx ++
+		}
+		p = son[p][u]
+	}
+	cnt[p] ++
+}
+
+func query(str string) int {
+	p := 0
+	for i := 0 ; i < len(str) ; i ++ {
+		u := int(str[i])
+		if son[p][u] != 0 {
+			return 0
+		}
+		p = son[p][u]
+	}
+	return cnt[p]
+}
