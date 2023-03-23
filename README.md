@@ -1,1 +1,1 @@
-# go-Algorithm-template
+# GO-Algorithm-template
