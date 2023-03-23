@@ -1,1 +1,3 @@
-# GO-Algorithm-template
+# GO 算法模板
+
+## 有时间再写写
