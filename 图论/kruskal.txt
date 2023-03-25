@@ -1,0 +1,51 @@
+const N=100010 // 1≤n≤10^5,
+const M=2*100010 // 1≤m≤2∗10^5 
+
+var (
+    edges [M]*Edge // 存放所有边
+    p[N] int // 并查集
+)
+
+type Edge struct{
+    a,b,c int
+}
+
+func kruskal() int{
+    for i:=1;i<=n;i++{
+        p[i] = i
+    }
+
+    sort.Slice(edges[:m], func(i,j int) bool {
+        return edges[i].c < edges[j].c
+    })
+
+    res:=0
+    cnt:=0 // 统计边数，因为通过集合合并方式组合树，只能通过统计边数看是不是将所有的点都合并到一个集合了
+
+    for i:=0;i<m;i++{
+        p1:=find(edges[i].a)
+        p2:=find(edges[i].b)
+
+        // 不在一个集合则合并
+        if p1!=p2  {
+            p[p2] = p1
+            res+=edges[i].c
+            cnt++
+        }
+    }
+    // 如果小于 n-1，则无法构造最小生成树
+    if cnt<n-1{
+        return -1
+    }
+    return res
+}
+
+// 并查集查询
+func find(a int) int{
+    if p[a]==a {
+        return a
+    }
+    b:= find(p[a])
+    p[a] = b
+    return b
+}

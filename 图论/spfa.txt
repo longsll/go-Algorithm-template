@@ -1,0 +1,35 @@
+var dist [N]int
+var st [N]bool
+
+
+func spfa() int{
+    for i:=0; i<N; i++{
+        dist[i] = 0x3f3f3f3f
+    }
+    dist[1] = 0
+
+    q := make([]int, 0)
+    q = append(q, 1)
+    st[1] = true
+    for len(q) > 0{
+        t := q[0]
+        q = q[1:]
+        st[t] = false
+        for i:=h[t]; i!=-1; i=ne[i]{
+            j := e[i]
+            if dist[j] > dist[t] + w[i]{
+                dist[j] = dist[t] + w[i]
+                if !st[j]{
+                    q = append(q, j)
+                    st[j] = true
+                }
+            }
+        }
+    }
+
+    if dist[n] == 0x3f3f3f3f {
+        return -1
+    } else {
+        return dist[n]
+    }
+}

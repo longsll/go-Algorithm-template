@@ -1,0 +1,47 @@
+var (
+    g [N][N]int // 稠密图，邻接矩阵存储
+    dist [N]int // 节点和现有生成树节点集合的距离，这一点比较特殊！！
+    st[N]bool // 是否已加入生成树
+)
+
+func prim() int{
+    for i:=1;i<=n;i++{
+        dist[i] = MaxDist
+    }
+
+    res:=0
+
+    for i:=1;i<=n;i++{
+        t:=-1
+
+        // 1. 寻找离集合距离最小的点t
+        for j:=1;j<=n;j++{
+            if !st[j] && (t==-1 || dist[t] > dist[j]) {
+                t = j
+            }
+        }
+
+
+        // 非第一个点，且找不到关联边
+        if i>1 && dist[t] == MaxDist {
+            return -1
+        }
+
+        // 2. 将节点t加入集合，并统计权值
+        st[t] = true
+
+        if t>1{
+            // 从第二个点开始统计权值
+            res+= dist[t]
+        }
+
+        // 3. 新加入点t，更新一下其他所有点离集合的距离，以便下次循环查找
+        for j:=1;j<=n;j++{
+            if !st[j] && dist[j] > g[t][j]{
+                dist[j] =  g[t][j]
+            }
+        }
+    }
+
+    return res
+}

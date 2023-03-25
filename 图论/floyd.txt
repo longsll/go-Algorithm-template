@@ -1,0 +1,28 @@
+var (
+    n, m, k int // n 个点，m 条边，k 个查询
+    arr [][]int // 邻接矩阵的存储。因为这里不需要输出路径，所以 path 矩阵不用了    
+)
+func init() {
+    arr = make([][]int, n + 1)
+    for i := 0; i <= n; i++ {
+        arr[i] = make([]int, n + 1)
+        for j := 0; j <= n; j++ {
+            if i != j {
+                arr[i][j] = 0x3f3f3f3f
+            }
+        }
+    }
+}
+
+func floyd() {
+    for p := 1; p <= n; p++ {
+        for i := 1; i <= n; i++ {
+            for j := 1; j <= n; j++ {
+                if arr[i][j] > arr[i][p] + arr[p][j] {
+                    arr[i][j] = arr[i][p] + arr[p][j]
+                }
+            }
+        }
+    }
+
+}

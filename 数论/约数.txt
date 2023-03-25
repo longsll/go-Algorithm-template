@@ -1,0 +1,23 @@
+//求约数
+func divisor(a int) []int{
+    var d[]int
+    for i:=1;i<=a/i;i++{
+        // 约数判断
+        if a%i == 0{
+            d=append(d,i)
+            if i!=a/i{
+                d=append(d, a/i)
+            }
+        }
+    }
+    sort.Ints(d)
+    return d
+}
+
+//最大公约数
+func gcd(a, b int) int{
+    if b > 0{
+        return gcd(b, a % b)
+    }
+    return a
+}

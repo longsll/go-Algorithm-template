@@ -1,0 +1,11 @@
+const N = 100010
+var e, ne, h, w [N]int
+var idx int
+
+func add(a, b, c int){
+    e[idx] = b
+    w[idx] = c
+    ne[idx] = h[a]
+    h[a] = idx
+    idx ++
+}

@@ -1,0 +1,26 @@
+func setColor(i, c int) bool {
+    if color[i] >0  {
+        // 已经着色过了，判断是否和重新尝试着色的颜色是否一致，是否矛盾
+        return color[i] == c
+    }
+
+    // 着色
+    color[i] = c
+
+    // 关联点的颜色转换
+    if c == 1{
+        c=2
+    }else{
+        c=1
+    }
+
+    for j:=h[i]; j>0;j=ne[j] {
+        k:=e[j]
+        // 关联点颜色着色
+        if !setColor(k,c) {
+            return false
+        }
+    }
+
+    return true
+}

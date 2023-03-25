@@ -1,0 +1,12 @@
+func qmi(a,b,p uint64) uint64{
+    a%=p
+    var res uint64 = 1
+    for b>0{
+        if b&1 > 0{
+            res = (res*a)%p
+        }
+        a=(a*a)%p
+        b>>=1
+    }
+    return res
+}
