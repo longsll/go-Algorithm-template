@@ -3,9 +3,7 @@ import (
     "fmt"
     "os"
     "bufio"
-    )
-
-const N = 1010
+)
 
 var (
     out = bufio.NewWriter(os.Stdout)
@@ -14,7 +12,10 @@ var (
 
 func main() {
     defer out.Flush()
-    T := 0; fmt.Fscan(in, &T)
-    fmt.Fprintln(out,"YES")
-    fmt.Fprintln(out, "NO")   
+    var T ,ans = 0 , 3
+    var n , k int
+    fmt.Fscan(in, &T)
+    fmt.Fscan(in, &n , &k)
+    fmt.Fprintln(out,ans)
+    fmt.Fprintln(out,6)   
 }
